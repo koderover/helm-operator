@@ -150,3 +150,8 @@ test-docs: build-docs
 serve-docs: build-docs
 	@echo Stating docs website on http://localhost:${DOCS_PORT}/_build/html/index.html
 	@docker run -i -p ${DOCS_PORT}:8000 -e USER_ID=$$UID flux-docs
+
+release-chart:
+	@HARBOR_USERNAME=$$(jq -r '.username' ${HOME}/.harbor.json);\
+	HARBOR_PASSWORD=$$(jq -r '.password' ${HOME}/.harbor.json);\
+	helm push --username=$$HARBOR_USERNAME --password=$$HARBOR_PASSWORD ./chart/helm-operator 8slan
