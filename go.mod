@@ -3,7 +3,7 @@ module github.com/fluxcd/helm-operator
 go 1.13
 
 require (
-	github.com/Masterminds/semver v1.5.0 // indirect
+	github.com/Masterminds/semver v1.5.0
 	github.com/fluxcd/flux v1.17.1-0.20200109130101-ca3e8f451dd0
 	github.com/ghodss/yaml v1.0.0
 	github.com/go-kit/kit v0.9.0
@@ -45,4 +45,6 @@ replace github.com/docker/docker => github.com/docker/docker v0.7.3-0.2019032701
 replace k8s.io/client-go => k8s.io/client-go v0.0.0-20191016111102-bec269661e48 // kubernetes-1.16.2
 
 // Pin Flux to kube-1.16 branch to break weaveworks/flux circular dependency (to be removed on Flux 1.18)
-replace github.com/fluxcd/flux => github.com/fluxcd/flux v1.17.1-0.20200109130101-ca3e8f451dd0
+replace github.com/fluxcd/flux => github.com/fluxcd/flux v1.17.1
+
+replace helm.sh/helm/v3 => github.com/koderover/helm/v3 v3.0.3-0.20200117023042-8ddb069eb9f5

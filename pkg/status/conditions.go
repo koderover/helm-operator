@@ -45,7 +45,7 @@ func SetCondition(client v1client.HelmReleaseInterface, hr *helmfluxv1.HelmRelea
 		newConditions := filterOutCondition(cHr.Status.Conditions, condition.Type)
 		cHr.Status.Conditions = append(newConditions, condition)
 
-		_, err = client.UpdateStatus(cHr)
+		_, err = UpdateStatus(client, cHr)
 		firstTry = false
 		return
 	})

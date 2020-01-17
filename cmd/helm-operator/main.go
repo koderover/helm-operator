@@ -26,6 +26,7 @@ import (
 	"github.com/fluxcd/helm-operator/pkg/helm/v2"
 	"github.com/fluxcd/helm-operator/pkg/helm/v3"
 	daemonhttp "github.com/fluxcd/helm-operator/pkg/http/daemon"
+	"github.com/fluxcd/helm-operator/pkg/k8sversion"
 	"github.com/fluxcd/helm-operator/pkg/operator"
 	"github.com/fluxcd/helm-operator/pkg/release"
 	"github.com/fluxcd/helm-operator/pkg/status"
@@ -187,6 +188,14 @@ func main() {
 		mainLogger.Log("error", fmt.Sprintf("error building kubernetes clientset: %v", err))
 		os.Exit(1)
 	}
+
+	serverVersion, err := kubeClient.ServerVersion()
+	if err != nil {
+		mainLogger.Log("error", fmt.Sprintf("error get server version: %v", err))
+		os.Exit(1)
+	}
+
+	k8sversion.SetVersion(serverVersion.String())
 
 	ifClient, err := clientset.NewForConfig(cfg)
 	if err != nil {

@@ -110,7 +110,7 @@ func SetReleaseStatus(client v1client.HelmReleaseInterface, hr *helmfluxv1.HelmR
 		cHr.Status.ReleaseName = releaseName
 		cHr.Status.ReleaseStatus = releaseStatus
 
-		_, err = client.UpdateStatus(cHr)
+		_, err = UpdateStatus(client, cHr)
 		firstTry = false
 		return
 	})
@@ -139,7 +139,7 @@ func SetReleaseRevision(client v1client.HelmReleaseInterface, hr *helmfluxv1.Hel
 		cHr.Status.PrevRevision = cHr.Status.Revision
 		cHr.Status.Revision = revision
 
-		_, err = client.UpdateStatus(cHr)
+		_, err = UpdateStatus(client, cHr)
 		firstTry = false
 		return
 	})
@@ -168,7 +168,7 @@ func SetPrevReleaseRevision(client v1client.HelmReleaseInterface, hr *helmfluxv1
 		cHr := hr.DeepCopy()
 		cHr.Status.PrevRevision = revision
 
-		_, err = client.UpdateStatus(cHr)
+		_, err = UpdateStatus(client, cHr)
 		firstTry = false
 		return
 	})
@@ -196,7 +196,7 @@ func SetValuesChecksum(client v1client.HelmReleaseInterface, hr *helmfluxv1.Helm
 		cHr := hr.DeepCopy()
 		cHr.Status.ValuesChecksum = valuesChecksum
 
-		_, err = client.UpdateStatus(cHr)
+		_, err = UpdateStatus(client, cHr)
 		firstTry = false
 		return
 	})
@@ -223,7 +223,7 @@ func SetObservedGeneration(client v1client.HelmReleaseInterface, hr *helmfluxv1.
 		cHr := hr.DeepCopy()
 		cHr.Status.ObservedGeneration = generation
 
-		_, err = client.UpdateStatus(cHr)
+		_, err = UpdateStatus(client, cHr)
 		firstTry = false
 		return
 	})
