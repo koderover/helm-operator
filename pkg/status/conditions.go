@@ -63,7 +63,7 @@ func SetCondition(client v1client.HelmReleaseInterface, hr *v1.HelmRelease, cond
 			cHr.Status.RollbackCount = hr.Status.RollbackCount + 1
 		}
 
-		_, err = client.UpdateStatus(cHr)
+		_, err = UpdateStatus(client, cHr)
 		firstTry = false
 		return
 	})
@@ -96,7 +96,7 @@ func UnsetCondition(client v1client.HelmReleaseInterface,
 			cHr.Status.RollbackCount = 0
 		}
 
-		_, err = client.UpdateStatus(cHr)
+		_, err = UpdateStatus(client, cHr)
 		firstTry = false
 		return
 	})

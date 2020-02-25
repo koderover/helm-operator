@@ -3,7 +3,7 @@ module github.com/fluxcd/helm-operator
 go 1.13
 
 require (
-	github.com/Masterminds/semver v1.5.0 // indirect
+	github.com/Masterminds/semver v1.5.0
 	github.com/bugsnag/panicwrap v1.2.0 // indirect
 	github.com/docker/go-metrics v0.0.1 // indirect
 	github.com/docker/libtrust v0.0.0-20160708172513-aabc10ec26b7 // indirect
@@ -58,4 +58,4 @@ replace k8s.io/client-go => k8s.io/client-go v0.17.2
 // github.com/fluxcd/flux
 // +-> github.com/fluxcd/helm-operator@v1.0.0-rc6
 //     +-> helm.sh/helm/v3@v3.0.2
-replace helm.sh/helm/v3 => helm.sh/helm/v3 v3.1.1
+replace helm.sh/helm/v3 => github.com/koderover/helm/v3 v3.1.2
