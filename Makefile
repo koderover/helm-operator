@@ -63,7 +63,7 @@ lint-e2e: test/bin/shfmt test/bin/shellcheck
 build/.%.done: docker/Dockerfile.%
 	mkdir -p ./build/docker/$*
 	cp $^ ./build/docker/$*/
-	$(SUDO) docker build -t docker.io/fluxcd/$* -t docker.io/fluxcd/$*:$(IMAGE_TAG) \
+	$(SUDO) docker build -t ccr.ccs.tencentyun.com/koderover-rc/$* -t ccr.ccs.tencentyun.com/koderover-rc/$*:$(IMAGE_TAG) \
 		--build-arg VCS_REF="$(VCS_REF)" \
 		--build-arg BUILD_DATE="$(BUILD_DATE)" \
 		-f build/docker/$*/Dockerfile.$* ./build/docker/$*
@@ -152,6 +152,7 @@ serve-docs: build-docs
 	@docker run -i -p ${DOCS_PORT}:8000 -e USER_ID=$$UID flux-docs
 
 release-chart:
+	docker push ccr.ccs.tencentyun.com/koderover-rc/helm-operator:$(IMAGE_TAG)
 	@HARBOR_USERNAME=$$(jq -r '.username' ${HOME}/.harbor.json);\
 	HARBOR_PASSWORD=$$(jq -r '.password' ${HOME}/.harbor.json);\
 	helm push --username=$$HARBOR_USERNAME --password=$$HARBOR_PASSWORD ./chart/helm-operator 8slan
